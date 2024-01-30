@@ -1,0 +1,21 @@
+key: "303d06c6dd3b4c218b6cd75540698744"
+name: "from ./package.json"
+version: "from ./package.json"
+dist:
+  - type: "main"
+    path: "./dist/main.js"
+assets: "./dist/public"
+configSchema: |
+  {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "type": "object",
+    "title": "ConfigurationSchema",
+    "properties": {},
+    "required": []
+  }
+hostMount: |
+  <html>
+  <head></head>
+  <body></body>
+  </html>
+
