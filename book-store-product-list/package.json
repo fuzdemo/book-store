@@ -2,7 +2,7 @@
   "name": "@playground/book-store-product-list",
   "version": "1.0.0",
   "scripts": {
-    "start": "webpack serve",
+    "start": "webpack serve --port=8081",
     "build:webpack": "webpack --mode=production",
     "analyze": "webpack --mode=production --env analyze",
     "lint": "eslint src --ext js,ts,tsx",

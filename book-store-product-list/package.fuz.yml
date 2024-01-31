@@ -1,6 +1,8 @@
 key: "0b5b3357d89a41949fe82c1acca62ec3"
 name: "from ./package.json"
 version: "from ./package.json"
+cover: null
+framework: react-17.0
 dist:
   - type: "main"
     path: "./dist/main.js"
@@ -18,4 +20,22 @@ hostMount: |
   <head></head>
   <body></body>
   </html>
+localInstallation:
+  hostApp: playground.book-store
+  baseUrl: "http://localhost:8081"
+  configuration: |
+    {
+    "test":"1234"
+    }
+  activation:
+    type: urlTree
+    matches: /
+standaloneInstallation:
+  hostApp: playground.book-store
+  configuration: |
+    {
+    }
+  activation:
+    type: urlTree
+    matches: /
 

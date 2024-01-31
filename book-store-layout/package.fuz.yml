@@ -1,6 +1,8 @@
 key: "5aedf71a73074aed949c0a8e010e3397"
 name: "from ./package.json"
 version: "from ./package.json"
+cover: null
+framework: angular-14.2
 dist:
   - type: "main"
     path: "./dist/app/main.js"
@@ -18,3 +20,22 @@ hostMount: |
   <head></head>
   <body></body>
   </html>
+localInstallation:
+  hostApp: blank
+  baseUrl: "http://localhost:4200"
+  configuration: |
+    {
+      "test": 212
+    }
+  activation:
+    type: urlTree
+    matches: /
+standaloneInstallation:
+  hostApp: playground.book-store
+  configuration: |
+    {
+      "test": 224
+    }
+  activation:
+    type: urlTree
+    matches: /test

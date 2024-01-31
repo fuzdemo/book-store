@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import {FusionizeAngularModule} from "@fusionize/fusionize-angular";
+import {NgbModule, NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,9 @@ import {FusionizeAngularModule} from "@fusionize/fusionize-angular";
   ],
   imports: [
     BrowserModule,
-    FusionizeAngularModule
+    FusionizeAngularModule,
+    NgbModule,
+    NgbNavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

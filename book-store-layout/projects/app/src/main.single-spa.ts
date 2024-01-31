@@ -5,7 +5,6 @@ import {singleSpaAngular} from 'single-spa-angular';
 import {environment} from './environments/environment';
 import {ConfigurationService} from "@fusionize/fusionize-angular";
 import {AppModule} from "./app/app.module";
-
 if (environment.production) {
   enableProdMode();
 }
