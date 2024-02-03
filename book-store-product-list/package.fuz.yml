@@ -29,7 +29,7 @@ localInstallation:
     }
   activation:
     type: urlTree
-    matches: /
+    matches: /books
 standaloneInstallation:
   hostApp: playground.book-store
   configuration: |
@@ -37,5 +37,5 @@ standaloneInstallation:
     }
   activation:
     type: urlTree
-    matches: /
+    matches: /books
 

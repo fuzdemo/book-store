@@ -2,7 +2,7 @@
   "name": "@playground/book-store-cart",
   "version": "1.0.0",
   "scripts": {
-    "start": "webpack serve",
+    "start": "webpack serve --port=8082",
     "build:webpack": "webpack --mode=production",
     "analyze": "webpack --mode=production --env analyze",
     "lint": "eslint src --ext js,ts,tsx",
@@ -50,6 +50,10 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@fusionize/fusionize-react": "17.0.5",
     "@types/jest": "^27.0.1",
     "@types/react": "^17.0.19",

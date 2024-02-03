@@ -1,9 +1,12 @@
 kind: installation
 id: 65b92fcda020246415bba1eb
 packageName: '@playground/book-store-layout'
-packageTag: 1.0.0.65b53641
+packageTag: 1.0.0.9737c3e2
 projectDomain: playground.book-store
-configuration: '{}'
+configuration: |
+  {
+  "navbarColor": "blue"
+  }
 enabled: true
 activation:
   type: urlTree

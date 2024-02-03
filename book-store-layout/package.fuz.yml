@@ -25,7 +25,7 @@ localInstallation:
   baseUrl: "http://localhost:4200"
   configuration: |
     {
-      "test": 212
+      "navbarColor": "red"
     }
   activation:
     type: urlTree
@@ -34,7 +34,7 @@ standaloneInstallation:
   hostApp: playground.book-store
   configuration: |
     {
-      "test": 224
+      "navbarColor": "green"
     }
   activation:
     type: urlTree

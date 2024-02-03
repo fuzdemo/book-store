@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import {FusionizeAngularModule} from "@fusionize/fusionize-angular";
 import {NgbModule, NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import {SidenavComponent} from "./components/sidenav/sidenav.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavigationBarComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -16,6 +19,6 @@ import {NgbModule, NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
     NgbNavModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
