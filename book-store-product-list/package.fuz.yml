@@ -25,7 +25,7 @@ localInstallation:
   baseUrl: "http://localhost:8081"
   configuration: |
     {
-    "test":"1234"
+    "test":"1"
     }
   activation:
     type: urlTree

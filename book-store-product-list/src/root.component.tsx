@@ -1,10 +1,12 @@
 import { ConfigurationService, Mountable } from "@fusionize/fusionize-react";
 import "./root.component.scss";
 import ProductCardComponent from "./product.card.component";
+import { useEffect } from "react";
 
 export default function Root(props) {
-  ConfigurationService.config(props);
-  const config = ConfigurationService.factory((c) => c);
+  useEffect(() => {
+    ConfigurationService.config(props);
+  }, []);
   return (
     <Mountable location="main-content">
       <div className="container">

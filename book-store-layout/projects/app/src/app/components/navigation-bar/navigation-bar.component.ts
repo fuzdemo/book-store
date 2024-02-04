@@ -25,7 +25,7 @@ export class NavigationBarComponent {
   }
 
   constructor(private configService: ConfigurationService) {
-    this.logo =  configService.assetUrl('assets/logo.png');
+    this.logo =  configService.assetUrl('assets/book-store-logo.png');
   }
 
 

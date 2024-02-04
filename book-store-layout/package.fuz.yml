@@ -38,4 +38,4 @@ standaloneInstallation:
     }
   activation:
     type: urlTree
-    matches: /test
+    matches: /

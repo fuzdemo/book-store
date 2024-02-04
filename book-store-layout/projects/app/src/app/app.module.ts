@@ -5,18 +5,29 @@ import {FusionizeAngularModule} from "@fusionize/fusionize-angular";
 import {NgbModule, NgbNavModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import {SidenavComponent} from "./components/sidenav/sidenav.component";
+import {RouterModule} from "@angular/router";
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationBarComponent,
-    SidenavComponent
+    SidenavComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
     FusionizeAngularModule,
     NgbModule,
-    NgbNavModule
+    NgbNavModule,
+    RouterModule.forRoot([
+      {path: "", pathMatch: "full", redirectTo: "books"},
+      {
+        path: "books", component: MainComponent, children: [
+          {path: "**", component: MainComponent}
+        ]
+      },
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent],

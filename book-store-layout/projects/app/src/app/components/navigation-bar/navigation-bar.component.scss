@@ -2,3 +2,7 @@
   display: flex;
   flex: auto 1 1;
 }
+.title {
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: rgba(0,0,0,0.3);
+}

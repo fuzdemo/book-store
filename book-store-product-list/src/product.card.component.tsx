@@ -1,3 +1,5 @@
+import { ServiceDirectory } from "@fusionize/fusionize-react";
+
 export default function ProductCardComponent(props) {
   return (
     <div className="col-sm-12 col-md-4 col-lg-3 p-1">
@@ -17,7 +19,16 @@ export default function ProductCardComponent(props) {
           <li className="list-group-item">A third item</li>
         </ul>
         <div className="card-body">
-          <button type="button" className="btn btn-primary m-1">
+          <button
+            type="button"
+            className="btn btn-primary m-1"
+            onClick={() =>
+              add({
+                title: props.title,
+                description: props.description,
+              })
+            }
+          >
             + Add to cart
           </button>
           <button type="button" className="btn btn-outline-dark m-1">
@@ -27,4 +38,10 @@ export default function ProductCardComponent(props) {
       </div>
     </div>
   );
+
+  function add(i) {
+    ServiceDirectory.instance()
+      .request(null, "cartService")
+      .subscribe((s) => s.add(i));
+  }
 }
