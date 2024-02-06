@@ -1,7 +1,7 @@
 kind: installation
 id: 65bde1d52d4aac5133a7bfad
 packageName: '@playground/book-store-product-list'
-packageTag: 1.0.0.7e0e4ae8
+packageTag: 1.0.0.a51e80da
 projectDomain: playground.book-store
 configuration: '{}'
 enabled: true

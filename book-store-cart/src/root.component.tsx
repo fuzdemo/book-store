@@ -8,19 +8,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { cartService } from "./cart-service";
 import Cart from "./cart";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 let layoutService = undefined;
 export default function Root(props) {
+  let [inCart, setInCart] = useState(cartService.getAll().length);
+
   useEffect(() => {
     ConfigurationService.config(props);
-      ServiceDirectory.instance().register(cartService, "cartService");
-
-      const subs = ServiceDirectory.instance()
+    ServiceDirectory.instance().register(cartService, "cartService");
+    const cartSubs = cartService.obs$.subscribe((i) =>
+      setInCart(() => i.length)
+    );
+    const lsSubs = ServiceDirectory.instance()
       .request(null, "layoutService")
       .subscribe((s) => (layoutService = s));
     const config = ConfigurationService.factory((c) => c);
-    return () => subs.unsubscribe();
+    return () => {
+      lsSubs.unsubscribe();
+      cartSubs.unsubscribe();
+    };
   }, []);
 
   return (
@@ -28,10 +35,18 @@ export default function Root(props) {
       <Mountable location="navigation-bar-end">
         <button
           type="button"
-          className="btn btn-outline-light"
+          className="btn btn-outline-light position-relative"
           onClick={() => layoutService.openSidebar()}
         >
           <FontAwesomeIcon icon={faCartShopping} />
+          {inCart > 0 ? (
+            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+              {inCart}
+              <span className="visually-hidden">unread messages</span>
+            </span>
+          ) : (
+            <></>
+          )}
         </button>
       </Mountable>
       <Mountable location="sidenav-header">
@@ -49,23 +64,6 @@ export default function Root(props) {
       </Mountable>
       <Mountable location="sidenav-content">
         <Cart></Cart>
-        <div className="d-flex">
-          <h4>Some book</h4>
-          <span className="spacer"></span>
-          <button
-            type="button"
-            className="btn btn-outline-dark"
-            onClick={() =>
-              cartService.add({
-                id: new Date().getTime(),
-                title: "a book",
-                description: "some book",
-              })
-            }
-          >
-            +
-          </button>
-        </div>
       </Mountable>
     </>
   );

@@ -12,19 +12,25 @@ export default function Root(props) {
       <div className="container">
         <div className="row">
           <ProductCardComponent
+            id={0}
             price={141.0}
             title="What a great Book"
             description="some description"
+            cover="https://s26162.pcdn.co/wp-content/uploads/2018/02/gatsby-original2.jpg"
           ></ProductCardComponent>
           <ProductCardComponent
-            price={141.0}
+            id={1}
+            price={141.99}
             title="What a great Book"
             description="some description"
+            cover="https://s26162.pcdn.co/wp-content/uploads/2018/02/gatsby-original2.jpg"
           ></ProductCardComponent>
           <ProductCardComponent
-            price={141.0}
+            id={2}
+            price={14.19}
             title="What a great Book"
             description="some description"
+            cover="https://s26162.pcdn.co/wp-content/uploads/2018/02/gatsby-original2.jpg"
           ></ProductCardComponent>
         </div>
       </div>

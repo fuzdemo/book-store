@@ -1,7 +1,7 @@
 import "./root.component.scss";
-import {cartService} from "./cart-service";
+import { cartService } from "./cart-service";
 import CartItem from "./cart-item";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 export default function Cart(props) {
   const [cart, setCart] = useState(cartService.getAll());
@@ -13,7 +13,11 @@ export default function Cart(props) {
   return (
     <ul className="list-group list-group-flush">
       {cart.map((i) => (
-        <CartItem key={i.id} {...i}></CartItem>
+        <CartItem
+          key={i.id}
+          {...i}
+          remove={(id) => cartService.remove(id)}
+        ></CartItem>
       ))}
     </ul>
   );

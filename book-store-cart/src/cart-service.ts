@@ -3,22 +3,26 @@ class CartService {
   private _items = [];
   private _sub: Subject<any[]> = new Subject<any[]>();
   obs$ = this._sub.asObservable();
+
   add(item) {
     this._items.push(item);
     this._sub.next([...this._items]);
   }
 
-  remove(item) {
-    const index = this._items.indexOf(item);
+  remove(id) {
+    const index = this._items.findIndex((ic) => ic.id == id);
     if (index > -1) {
-      // only splice array when item is found
-      this._items.splice(index, 1); // 2nd parameter means remove one item only
+      this._items.splice(index, 1);
     }
     this._sub.next([...this._items]);
   }
 
   getAll() {
     return this._items;
+  }
+
+  get(id) {
+    return this._items.find((ic) => ic.id == id);
   }
 }
 export const cartService = new CartService();
