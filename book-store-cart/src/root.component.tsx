@@ -21,7 +21,7 @@ export default function Root(props) {
       setInCart(() => i.length)
     );
     const lsSubs = ServiceDirectory.instance()
-      .request(null, "layoutService")
+      .request("layoutService")
       .subscribe((s) => (layoutService = s));
     const config = ConfigurationService.factory((c) => c);
     return () => {

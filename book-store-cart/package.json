@@ -2,6 +2,7 @@
   "name": "@playground/book-store-cart",
   "version": "1.0.0",
   "scripts": {
+    "deploy": "fuz deploy",
     "start": "webpack serve --port=8082",
     "build:webpack": "webpack --mode=production",
     "analyze": "webpack --mode=production --env analyze",
@@ -11,7 +12,8 @@
     "test": "cross-env BABEL_ENV=test jest",
     "watch-tests": "cross-env BABEL_ENV=test jest --watch",
     "coverage": "cross-env BABEL_ENV=test jest --coverage",
-    "build:types": "tsc"
+    "build:types": "tsc",
+    "serve:fuz:local": "npx serve _local/"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",
@@ -54,7 +56,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@fusionize/fusionize-react": "17.0.5",
+    "@fusionize/fusionize-react": "17.0.6",
     "@types/jest": "^27.0.1",
     "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",

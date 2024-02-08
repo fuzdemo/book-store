@@ -1,39 +1,40 @@
 import { ConfigurationService, Mountable } from "@fusionize/fusionize-react";
-import "./root.component.scss";
-import ProductCardComponent from "./product.card.component";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import ProductListComponent from "./product.list.component";
+import ProductSearchComponent from "./product.search.component";
 
 export default function Root(props) {
+  const [books, setBooks] = useState([]);
+  const [search, setSearch] = useState("");
+
   useEffect(() => {
     ConfigurationService.config(props);
+    fetch(ConfigurationService.instance().assetUrl("public/example.json")).then((r) =>
+      r.json().then((json) => setBooks(json.books))
+    );
   }, []);
   return (
-    <Mountable location="main-content">
-      <div className="container">
-        <div className="row">
-          <ProductCardComponent
-            id={0}
-            price={141.0}
-            title="What a great Book"
-            description="some description"
-            cover="https://s26162.pcdn.co/wp-content/uploads/2018/02/gatsby-original2.jpg"
-          ></ProductCardComponent>
-          <ProductCardComponent
-            id={1}
-            price={141.99}
-            title="What a great Book"
-            description="some description"
-            cover="https://s26162.pcdn.co/wp-content/uploads/2018/02/gatsby-original2.jpg"
-          ></ProductCardComponent>
-          <ProductCardComponent
-            id={2}
-            price={14.19}
-            title="What a great Book"
-            description="some description"
-            cover="https://s26162.pcdn.co/wp-content/uploads/2018/02/gatsby-original2.jpg"
-          ></ProductCardComponent>
-        </div>
-      </div>
-    </Mountable>
+    <>
+      <Mountable location="navigation-bar-start" weight={0}>
+        <ProductSearchComponent
+          searchPhrase={search}
+          doSearch={(s) => setSearch(s)}
+        ></ProductSearchComponent>
+      </Mountable>
+      <Mountable location="main-content">
+        <ProductListComponent books={getFilteredBooks()}></ProductListComponent>
+      </Mountable>
+    </>
   );
+
+  function getFilteredBooks() {
+    const phrase = search.toLowerCase();
+    return books.filter(
+      (b) =>
+        search == "" ||
+        b.title.toLowerCase().search(phrase) >= 0 ||
+        b.genre.toLowerCase().search(phrase) >= 0 ||
+        b.keywords.some((k) => k.toLowerCase().search(phrase) >= 0)
+    );
+  }
 }

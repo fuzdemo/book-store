@@ -12,7 +12,12 @@ export default function CartItem(props) {
       />
       <div className="ms-2 me-auto">
         <div className="fw-bold">{props.title}</div>
-        {props.description}
+        <p
+          className="d-inline-block text-truncate"
+          style={{ maxWidth: "199px" }}
+        >
+          {props.description}
+        </p>
       </div>
       <div className="d-flex flex-column">
         <h3 className="badge text-bg-light">
