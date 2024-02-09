@@ -18,4 +18,21 @@ hostMount: |
   <head></head>
   <body></body>
   </html>
-
+localInstallation:
+  hostApp: playground.book-store
+  baseUrl: "http://localhost:8083"
+  configuration: |
+    {
+    "test":"1"
+    }
+  activation:
+    type: ant
+    matches: /books/*
+standaloneInstallation:
+  hostApp: playground.book-store
+  configuration: |
+    {
+    }
+  activation:
+    type: ant
+    matches: /books/*

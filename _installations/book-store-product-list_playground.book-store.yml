@@ -1,10 +1,10 @@
 kind: installation
 id: 65bde1d52d4aac5133a7bfad
 packageName: '@playground/book-store-product-list'
-packageTag: 1.0.0.8a559ec2
+packageTag: 1.0.0.c93f50d8
 projectDomain: playground.book-store
 configuration: '{}'
 enabled: true
 activation:
-  type: urlTree
+  type: ant
   matches: /books

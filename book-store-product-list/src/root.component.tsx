@@ -9,8 +9,8 @@ export default function Root(props) {
 
   useEffect(() => {
     ConfigurationService.config(props);
-    fetch(ConfigurationService.instance().assetUrl("public/example.json")).then((r) =>
-      r.json().then((json) => setBooks(json.books))
+    fetch(ConfigurationService.instance().assetUrl("public/books.json")).then(
+      (r) => r.json().then((json) => setBooks(json.books))
     );
   }, []);
   return (

@@ -4,11 +4,17 @@ import { useEffect, useState } from "react";
 let cartService = undefined;
 export default function ProductCardComponent(props) {
   let [isInCart, setIsInCart] = useState(false);
-  let cartServiceSubscription = undefined;
   useEffect(() => {
+    let cartServiceSubscription = undefined;
     const serviceDirectorySubs = ServiceDirectory.instance()
       .request("cartService")
-      .subscribe((cartService) => setCartService(cartService));
+      .subscribe((cs) => {
+        cartService = cs;
+        setIsInCart(cs.contains(props.id));
+        cartServiceSubscription = cs.obs$.subscribe((i) =>
+          setIsInCart(cs.contains(props.id))
+        );
+      });
     return () => {
       serviceDirectorySubs.unsubscribe();
       if (cartServiceSubscription) {
@@ -16,13 +22,6 @@ export default function ProductCardComponent(props) {
       }
     };
   }, []);
-
-  function setCartService(cs) {
-    cartService = cs;
-    cartServiceSubscription = cartService.obs$.subscribe((i) =>
-      setIsInCart(cartService.get(props.id) != undefined)
-    );
-  }
 
   return (
     <div className="col-sm-12 col-md-4 col-lg-3 p-1">
@@ -50,12 +49,13 @@ export default function ProductCardComponent(props) {
           </li>
         </ul>
         <div className="card-body text-end">
-          <button
+          <a
+            href={`/books/${props.id}`}
             type="button"
             className="btn btn-outline-secondary border-0 m-1"
           >
             View Details
-          </button>
+          </a>
           <button
             type="button"
             className="btn btn-outline-primary m-1"

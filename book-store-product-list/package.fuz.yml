@@ -28,7 +28,7 @@ localInstallation:
     "test":"1"
     }
   activation:
-    type: urlTree
+    type: ant
     matches: /books
 standaloneInstallation:
   hostApp: playground.book-store
@@ -36,6 +36,6 @@ standaloneInstallation:
     {
     }
   activation:
-    type: urlTree
+    type: ant
     matches: /books
 

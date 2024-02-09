@@ -5,8 +5,10 @@ class CartService {
   obs$ = this._sub.asObservable();
 
   add(item) {
-    this._items.push(item);
-    this._sub.next([...this._items]);
+    if (item.id && !this.contains(item.id)) {
+      this._items.push(item);
+      this._sub.next([...this._items]);
+    }
   }
 
   remove(id) {
@@ -23,6 +25,10 @@ class CartService {
 
   get(id) {
     return this._items.find((ic) => ic.id == id);
+  }
+
+  contains(id) {
+    return this.get(id) != undefined;
   }
 }
 export const cartService = new CartService();
