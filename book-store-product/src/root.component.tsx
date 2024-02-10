@@ -8,12 +8,14 @@ export default function Root(props) {
     ConfigurationService.config(props);
   }, []);
   return (
-    <Mountable location="main-content">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/books/:id" element={<ProductComponent />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </Mountable>
+    <>
+      <Mountable location="main-content">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/books/:id" element={<ProductComponent />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </Mountable>
+    </>
   );
 }

@@ -38,11 +38,11 @@ export default function Root(props) {
           className="btn btn-outline-light position-relative"
           onClick={() => layoutService.openSidebar()}
         >
-          <FontAwesomeIcon icon={faCartShopping} />
+          <FontAwesomeIcon icon={faCartShopping} /> Shopping Cart
           {inCart > 0 ? (
             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
               {inCart}
-              <span className="visually-hidden">unread messages</span>
+              <span className="visually-hidden">cart items</span>
             </span>
           ) : (
             <></>

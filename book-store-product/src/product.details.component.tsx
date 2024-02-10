@@ -1,6 +1,20 @@
+import { MountPlace } from "@fusionize/fusionize-react";
 import "./product.details.component.css";
+import { useEffect, useState } from "react";
 
 export default function ProductDetailsComponent(props) {
+  let [isInCart, setIsInCart] = useState(false);
+  useEffect(() => {
+    setIsInCart(() => props.cartService.contains(props.book.id));
+    const cartServiceSubscription = props.cartService.obs$.subscribe((i) =>
+      setIsInCart(() => props.cartService.contains(props.book.id))
+    );
+
+    return () => {
+      cartServiceSubscription.unsubscribe();
+    };
+  }, []);
+
   return (
     <>
       <div className="card m-3 text-bg-light">
@@ -9,7 +23,7 @@ export default function ProductDetailsComponent(props) {
             <img
               src={props.book.cover}
               className="img-fluid rounded-start h-100"
-              alt="..."
+              alt={props.book.title}
             />
           </div>
           <div className="col-md-9  col-xl-10">
@@ -26,7 +40,6 @@ export default function ProductDetailsComponent(props) {
       </div>
       <div className="card m-3 text-bg-light">
         <div className="card-header">
-          {" "}
           Ready to read this novel in <b>{props.book.genre}</b> genre
         </div>
         <div className="card-body">
@@ -41,16 +54,46 @@ export default function ProductDetailsComponent(props) {
             </span>
           ))}
         </div>
-        <ul className="list-group list-group-flush text-end">
+        <ul className="list-group list-group-flush">
           <li className="list-group-item">
-            <h2>${Intl.NumberFormat().format(props.book.price)}</h2>
-            <span className="text-muted">Immediate online delivery</span>
+            <div className="d-flex flex-row">
+              <MountPlace location="review-score"></MountPlace>
+              <span className="spacer"></span>
+              <div className=" text-end">
+                <h2>${Intl.NumberFormat().format(props.book.price)}</h2>
+                <span className="text-muted">Immediate online delivery</span>
+              </div>
+            </div>
           </li>
         </ul>
         <div className="card-footer text-end">
-          <a href="#" className="btn btn-primary">
-            + Add <b>"{props.book.title}"</b> to my cart
-          </a>
+          {isInCart ? (
+            <button
+              type="button"
+              className="btn  btn-outline-danger m-1"
+              onClick={() => props.cartService.remove(props.book.id)}
+            >
+              - Remove <b>"{props.book.title}"</b> from my cart
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn btn-primary m-1"
+              onClick={() => props.cartService.add(props.book)}
+            >
+              + Add <b>"{props.book.title}"</b> to my cart
+            </button>
+          )}
+        </div>
+      </div>
+      <div className="card m-3 text-bg-light">
+        <div className="card-header">
+          <span className="text-muted">
+            <b>{props.book.title}</b> reviewed by readers
+          </span>
+        </div>
+        <div className="card-body">
+          <MountPlace location="reviews-container"></MountPlace>
         </div>
       </div>
     </>

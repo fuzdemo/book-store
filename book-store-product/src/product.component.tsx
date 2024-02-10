@@ -1,9 +1,10 @@
 import {
   ConfigurationService,
+  Mountable,
   ServiceDirectory,
 } from "@fusionize/fusionize-react";
 import { useEffect, useState } from "react";
-import { json, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProductLoadingComponent from "./product.loding.component";
 import ProductErrorComponent from "./product.error.components";
 import ProductDetailsComponent from "./product.details.component";
@@ -11,12 +12,11 @@ import { from, delay, take } from "rxjs";
 let cartService = undefined;
 export default function ProductComponent(props) {
   const params = useParams();
+  const navigate = useNavigate();
 
-  let [isInCart, setIsInCart] = useState(false);
   let [book, setBook] = useState(undefined);
 
   useEffect(() => {
-    let cartServiceSubscription = undefined;
     fetch(
       ConfigurationService.instance().assetUrl(`public/books/${params.id}.json`)
     ).then((r) => {
@@ -30,28 +30,37 @@ export default function ProductComponent(props) {
       .request("cartService")
       .subscribe((cs) => {
         cartService = cs;
-        setIsInCart(cs.contains(props.id));
-        cartServiceSubscription = cs.obs$.subscribe((i) =>
-          setIsInCart(cs.contains(props.id))
-        );
       });
-    return () => {
-      serviceDirectorySubs.unsubscribe();
-      if (cartServiceSubscription) {
-        cartServiceSubscription.unsubscribe();
-      }
-    };
+    return () => serviceDirectorySubs.unsubscribe();
   }, []);
 
   return (
-    <div className="container">
-      {book && book.id ? (
-        <ProductDetailsComponent book={book}></ProductDetailsComponent>
-      ) : book ? (
-        <ProductErrorComponent></ProductErrorComponent>
-      ) : (
-        <ProductLoadingComponent></ProductLoadingComponent>
-      )}
-    </div>
+    <>
+      <Mountable location="navigation-bar-start">
+        <ul className="navbar-nav ">
+          <li className="nav-item">
+            <a
+              className="nav-link ms-3"
+              onClick={() => navigate(-1)}
+              href="/books"
+            >
+              ← Back to Book list
+            </a>
+          </li>
+        </ul>
+      </Mountable>
+      <div className="container">
+        {book && book.id ? (
+          <ProductDetailsComponent
+            book={book}
+            cartService={cartService}
+          ></ProductDetailsComponent>
+        ) : book ? (
+          <ProductErrorComponent></ProductErrorComponent>
+        ) : (
+          <ProductLoadingComponent></ProductLoadingComponent>
+        )}
+      </div>
+    </>
   );
 }

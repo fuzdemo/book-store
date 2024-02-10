@@ -1,17 +1,19 @@
-import {ConfigurationService} from "@fusionize/fusionize-react";
-import './root.component.scss';
+import { ConfigurationService, Mountable } from "@fusionize/fusionize-react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import ReviewsListComponent from "./reviews.list.component";
 
 export default function Root(props) {
+  useEffect(() => {
     ConfigurationService.config(props);
-    const config = ConfigurationService.factory((c) => c);
-    return (
-        <section>
-            <div className="content">
-                <img src={ConfigurationService.instance().assetUrl("public/logo.png")} style={{width: 24}}
-                     alt="logo"/>
-                <span>{props.name} app is running!</span>
-            </div>
-            <span>{JSON.stringify(config())}</span>
-        </section>
-    );
+  }, []);
+  return (
+    <Mountable location="reviews-container">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/books/:id" element={<ReviewsListComponent />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </Mountable>
+  );
 }
